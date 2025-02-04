@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TO-DO-APP</title>
+  <style>
+       body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+ #projects {
+      display: inline-block;
+      text-align: left;
+    }
+   
+       input[type="text"] {
+      width: 80%;
+      padding: 8px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+   
+  input[type="checkbox"] {
+      margin-right: 5px;
+    }
+  
+    
+     input[type="checkbox"]:checked + label {
+      text-decoration: line-through;
+      color: #888;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Reminders</h1>
+
+  <div id="projects">
+  </div><br>
+
+  <input type="text" id="todo" placeholder="Add a task and press Enter" onkeyup="addTodo(event)">
+
+  <script>
+    const arr = ["Portfolio", "Project 1", "Project 2"];
+
+    const projectList = arr.map((item) => {
+      return `<input type="checkbox"><label class="strikethrough">${item}</label></br>`;  
+    }).join('');
+
+    document.getElementById("projects").innerHTML = projectList;
+
+    function addTodo(event) {
+      if (event.keyCode === 13) {
+        const newItem = document.getElementById("todo").value.trim();
+        if (newItem) {
+          arr.push(newItem);
+          document.getElementById("todo").value = "";
+          const project = arr.map((item) => {
+            return `<input type="checkbox"><label class="strikethrough">${item}</label></br>`;
+          }).join('');
+          document.getElementById("projects").innerHTML = project;
+        }
+      }
+    }
+  </script>
+</body>
+</html>
